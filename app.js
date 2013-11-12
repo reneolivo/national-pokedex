@@ -6,8 +6,8 @@
 var express = require('express');
 
 //ROUTES:
-var routes = require('./routes');
-var pokedex	= require('./routes/api/pokedex');
+var routes 			= require('./routes');
+var pokedexRouter	= require('./routes/api/pokedex');
 
 //MODELS:
 var pokedexModel = require('./models/pokedex').init();
@@ -36,7 +36,9 @@ if ('development' == app.get('env')) {
 
 //ROUTES DEFINITION:
 app.get('/', routes.index);
-app.get( '/api/pokedex', pokedex.filtrar );
+app.get( '/api/pokedex', pokedexRouter.filtrar );
+app.post( '/api/pokedex', pokedexRouter.insertar );
+app.get( '/api/pokedex/:id', pokedexRouter.uno );
 
 
 //RUN:

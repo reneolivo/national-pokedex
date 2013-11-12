@@ -154,8 +154,8 @@ module.exports.insertar = function(v) {
 		v.defensa 		|| 0,
 		v.ataqueSP 		|| 0,
 		v.defensaSP		|| 0,
-		function() {
-			def.resolve();
+		function(err, lastID) {
+			def.resolve( lastID );
 		}
 	);
 
@@ -166,10 +166,14 @@ module.exports.filtrar = function(filtros) {
 	var def = Q.defer();
 
 	//QUERY STRING:
+	//TODO: SQL Injection
 	var queryString = 'SELECT * FROM pokedex WHERE 1';
 
+	if (filtros.id) {
+		queryString += ' AND id = "'+ filtros.id +'"';
+	}
+
 	if (filtros.tipos) {
-		//TODO: SQL Injection
 		queryString += ' AND tipos LIKE "%' + filtros.tipos + '%"';
 	}
 
