@@ -11,10 +11,13 @@
     <script data-require="jquery@*" data-semver="2.0.3" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
     <script data-require="bootstrap@*" data-semver="3.0.0" src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
     <script data-require="angular.js@*" data-semver="1.2.0-rc3-nonmin" src="http://code.angularjs.org/1.2.0-rc.3/angular.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular-resource.min.js"></script>
     <script src="http://code.angularjs.org/1.2.0/angular-route.min.js"></script>
 
     <script src="/js/main.js"></script>
     <script src="/js/clases/Pokemon.js"></script>
+    <script src="/js/clases/Pokedex.js"></script>
+    <script src="/js/services/PokedexREST.js"></script>
     <script src="/js/controladores/principal.js"></script>
     <script src="/js/controladores/pokedex.js"></script>
     <script src="/js/controladores/agregar.js"></script>
@@ -27,9 +30,9 @@
         <h1>National Pokedex</h1>
         
         <nav>
-          <ul>
-            <li><a href="#/">Inicio</a></li>
-            <li><a href="#/agregar">Agregar</a></li>
+          <ul class="nav nav-tabs">
+            <li ng-class="{active: seccionActual == '/'}"><a href="#/">Inicio</a></li>
+            <li ng-class="{active: seccionActual == '/agregar'}"><a href="#/agregar">Agregar</a></li>
           </ul>
         </nav>
       </header>

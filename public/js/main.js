@@ -1,5 +1,5 @@
 angular
-  .module('NationalPokedex', ['ngRoute'])
+  .module('NationalPokedex', ['ngRoute','ngResource'])
   .config(function($routeProvider) {
     $routeProvider
       .when('/', {
