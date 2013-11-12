@@ -159,7 +159,8 @@ module.exports.insertar = function(v) {
 			v.defensaSP		|| 0,
 			function(err) {
 				if (err) {
-					return def.reject( err, queryString );
+					err.queryString = queryString;
+					return def.reject( err );
 				}
 
 				//NOTE: lastID param not working on INSERT
@@ -168,7 +169,8 @@ module.exports.insertar = function(v) {
 
 				DB.get(queryString, function(err, resultado) {
 					if (err) {
-						return def.reject( err, queryString );
+						err.queryString = queryString;
+						return def.reject( err );
 					}
 					
 					insert.finalize();
@@ -211,7 +213,8 @@ module.exports.actualizar = function(id, v) {
 
 	DB.run( queryString, parametros, function(err) {
 		if (err) {
-			return def.reject( err, queryString );
+			err.queryString = queryString;
+			return def.reject( err );
 		}
 
 		return def.resolve();
@@ -239,13 +242,12 @@ module.exports.filtrar = function(filtros) {
 
 	queryString += ' ORDER BY id DESC';
 
-	console.log(queryString);
-
 
 	//QUERY:
 	DB.all(queryString, params, function(err, resultados) {
 		if (err) {
-			return def.reject( err, queryString );
+			err.queryString = queryString;
+			return def.reject( err );
 		}
 
 		_.map( resultados, function(resultado) {
