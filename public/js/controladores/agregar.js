@@ -1,10 +1,15 @@
 angular.module('NationalPokedex')
-.controller('ControladorAgregar', function($scope, Pokemon) {
+.controller('ControladorAgregar', function($scope, $location, Pokemon, PokedexREST) {
 	$scope.cambiarSeccion( '/agregar' );
 
 	$scope.agregar = function agregar() {
-		$scope.pokedex.pokemons.push( $scope.nuevo );
-		$scope.reiniciar();
+		var pokemon = new PokedexREST( $scope.nuevo );
+
+		pokemon.$save(function(resultado) {
+			$scope.pokedex.pokemons.unshift( resultado );
+			$scope.reiniciar();
+			$location.path('/');
+		})
 	}
 
 	$scope.reiniciar = function reiniciar() {
