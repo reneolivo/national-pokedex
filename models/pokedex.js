@@ -1,4 +1,5 @@
 var Q		= require('q');
+var _		= require('lodash');
 var sqlite3 = require('sqlite3');
 var DB		= new sqlite3.Database( '../pokedex.db' );
 
@@ -164,6 +165,7 @@ module.exports.insertar = function(v) {
 module.exports.filtrar = function(filtros) {
 	var def = Q.defer();
 
+	//QUERY STRING:
 	var queryString = 'SELECT * FROM pokedex WHERE 1';
 
 	if (filtros.tipos) {
@@ -173,10 +175,16 @@ module.exports.filtrar = function(filtros) {
 
 	queryString += ' ORDER BY id DESC';
 
+
+	//QUERY:
 	DB.all(queryString, function(err, resultados) {
 		if (err) {
 			return def.reject( err );
 		}
+
+		_.map( resultados, function(resultado) {
+			resultado.tipos = resultado.tipos.split(',');
+		});
 
 		return def.resolve( resultados );
 	})
