@@ -119,7 +119,7 @@ module.exports.insertar = function(v) {
 
 	var def = Q.defer();
 
-	var insert = DB.prepare([
+	var queryString = [
 		'INSERT INTO pokedex (',
 			'nombre,',
 			'imagen,',
@@ -139,7 +139,9 @@ module.exports.insertar = function(v) {
 			'?,',
 			'?',
 		');'
-	].join(''));
+	].join('');
+
+	var insert = DB.prepare( queryString );
 
 	if (Array.isArray(v.tipos)) {
 		v.tipos = v.tipos.join(',');
@@ -157,14 +159,16 @@ module.exports.insertar = function(v) {
 			v.defensaSP		|| 0,
 			function(err) {
 				if (err) {
-					return def.reject( err );
+					return def.reject( err, queryString );
 				}
 
 				//NOTE: lastID param not working on INSERT
 				//this fixes the issue:
-				DB.get('SELECT last_insert_rowid() AS lastID;', function(err, resultado) {
+				queryString = 'SELECT last_insert_rowid() AS lastID;';
+
+				DB.get(queryString, function(err, resultado) {
 					if (err) {
-						return def.reject( err );
+						return def.reject( err, queryString );
 					}
 					
 					insert.finalize();
@@ -207,7 +211,7 @@ module.exports.actualizar = function(id, v) {
 
 	DB.run( queryString, parametros, function(err) {
 		if (err) {
-			return def.reject( err );
+			return def.reject( err, queryString );
 		}
 
 		return def.resolve();
@@ -220,24 +224,28 @@ module.exports.filtrar = function(filtros) {
 	var def = Q.defer();
 
 	//QUERY STRING:
-	//TODO: SQL Injection
 	var queryString = 'SELECT * FROM pokedex WHERE 1';
+	var params		= {};
 
 	if (filtros.id) {
-		queryString += ' AND id = "'+ filtros.id +'"';
+		queryString += ' AND id = $id';
+		params.id = filtros.id;
 	}
 
 	if (filtros.tipos) {
-		queryString += ' AND tipos LIKE "%' + filtros.tipos + '%"';
+		//TODO: SQL Injection:
+		queryString += ' AND tipos LIKE "%'+ filtros.tipos +'%"';
 	}
 
 	queryString += ' ORDER BY id DESC';
 
+	console.log(queryString);
+
 
 	//QUERY:
-	DB.all(queryString, function(err, resultados) {
+	DB.all(queryString, params, function(err, resultados) {
 		if (err) {
-			return def.reject( err );
+			return def.reject( err, queryString );
 		}
 
 		_.map( resultados, function(resultado) {
