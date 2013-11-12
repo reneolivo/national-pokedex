@@ -1,20 +1,24 @@
 <section id="pokedex" class="container">
-  <article class="pokemon row col-md-4" ng-repeat="pokemon in pokedex.pokemons">
-    <div class="numero col-md-1">
-      <h3>#{{pokemon.id}}</h3>
-    </div>
+	<article class="pokemon row col-md-4" ng-repeat="pokemon in pokedex.pokemons">
+		<div class="numero col-md-1">
+			<h3>#{{pokemon.id}}</h3>
+		</div>
 
-    <div class="perfil col-md-3">
-      <a href="/pokedex/{{pokemon.id}}">
-        <img ng-src="{{pokemon.imagen}}" alt="{{pokemon.nombre}}" width="48" />
-      </a>
-      
-      <button class="btn btn-xs btn-danger" ng-click="pokedex.eliminar( pokemon );">Eliminar</button>
-    </div>
-    
-    <div class="ficha col-md-7">
-        <h2>{{pokemon.nombre}}</h2>
-        <p>{{pokemon.descripcion}}</p>
-    </div>
-  </article>
+		<div class="perfil col-md-3">
+			<a href="/#/detalles/{{pokemon.id}}">
+				<img ng-src="{{pokemon.imagen}}" alt="{{pokemon.nombre}}" width="48" />
+			</a>
+
+			<button class="btn btn-xs btn-danger" ng-click="pokedex.eliminar( pokemon );">Eliminar</button>
+		</div>
+
+		<div class="ficha col-md-7">
+			<h2>
+				<a href="/#/detalles/{{pokemon.id}}">
+					{{pokemon.nombre}}
+				</a>
+			</h2>
+			<p>{{pokemon.descripcion}}</p>
+		</div>
+	</article>
 </section>

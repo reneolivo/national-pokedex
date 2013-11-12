@@ -1,11 +1,31 @@
-h1 {
-  margin: 0;
-  padding: 0.3em 0;
-  font-size: 14px;
-  font-weight: bold;
-  background: #EEE;
-  border-bottom: 2px solid #AAA;
+header {
+	margin-bottom: 3em;	
 }
+
+header h1 {
+  margin: 0 0 0.2em 0;
+  padding: 0.3em 1em;
+  font-weight: bold;
+  color: #FFF;
+  background: #E74C3C;
+  border-bottom: 4px solid #C0392B;
+}
+
+/* AGREGAR: */
+
+#agregrar-pokemon {
+	width: 500px;
+}
+
+#agregrar-pokemon .input {
+	margin-bottom: 0.5em;
+}
+
+#agregrar-pokemon .input-group-addon {
+	min-width: 120px;
+}
+
+/* HELPERS: */;
 
 .pokemon .perfil img {
   display: block;
