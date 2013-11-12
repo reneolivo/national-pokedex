@@ -180,7 +180,7 @@ module.exports.insertar = function(v) {
 	return def.promise;
 }
 
-module.exports.actualizar = function(v) {
+module.exports.actualizar = function(id, v) {
 	var def = Q.defer();
 
 	var queryString = 'UPDATE pokedex SET';
@@ -201,6 +201,9 @@ module.exports.actualizar = function(v) {
 			parametros.push( v[ campo ] );
 		}
 	});
+
+	queryString += ' WHERE id = ? ';
+	parametros.push( id );
 
 	DB.run( queryString, parametros, function(err) {
 		if (err) {

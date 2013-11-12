@@ -22,7 +22,7 @@ exports.insertar = function(req, res) {
 
 exports.actualizar = function(req, res) {
 	Pokedex.actualizar( req.params.id, req.body ).then(function() {
-		Pokedes.filtrar({ id : req.params.id }).then(function( resultados ) {
+		Pokedex.filtrar({ id : req.params.id }).then(function( resultados ) {
 			res.json( resultados[ 0 ] );
 		});
 	});
