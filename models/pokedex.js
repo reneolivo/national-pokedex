@@ -245,11 +245,11 @@ module.exports.filtrar = function(filtros) {
 
 	//QUERY STRING:
 	var queryString = 'SELECT * FROM pokedex WHERE 1';
-	var params		= {};
+	var params		= [];
 
 	if (filtros.id) {
-		queryString += ' AND id = $id';
-		params.id = filtros.id;
+		queryString += ' AND id = ?';
+		params.push( filtros.id );
 	}
 
 	if (filtros.tipos) {

@@ -10,7 +10,7 @@ angular
         templateUrl: '/seccion/agregar.html',
         controller: 'ControladorAgregar'
       })
-      .when('/detalles/:indice', {
+      .when('/detalles/:id', {
         templateUrl: '/seccion/detalles.html',
         controller: 'ControladorDetalles'
       })

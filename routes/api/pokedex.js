@@ -15,7 +15,11 @@ exports.filtrar = function(req, res) {
 exports.uno = function(req, res) {
 	req.query.id = req.params.id;
 
-	exports.filtrar(req, res);
+	Pokedex.filtrar( req.query ).then(function( resultados ) {
+		res.json( resultados[ 0 ] );
+	}).fail(function(err) {
+		handlerErrorGenerico( res, err );
+	});
 }
 
 exports.insertar = function(req, res) {

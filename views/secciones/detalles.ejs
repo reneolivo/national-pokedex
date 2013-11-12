@@ -1,17 +1,16 @@
 <section id="pokedex-detalles">
-  <article class="pokemon row" ng-repeat="pokemon in pokedex.pokemons">
-    <div class="perfil col-md-4">
-      <img ng-src="{{pokemon.imagen}}" alt="{{pokemon.nombre}}" />
+  <article class="pokemon row col-md-6">
+    <div class="perfil col-md-6">
+      <img ng-src="{{pokemon.imagen}}" alt="{{pokemon.nombre}}" width="200" />
       
       <div class="tipos">
         <span class="badge tipo-{{tipo}}" ng-repeat="tipo in pokemon.tipos">
-          {{tipo[0]}}
+          {{tipo}}
         </span>
       </div>
-      <button class="btn btn-xs btn-danger" ng-click="pokedex.eliminar( pokemon );">Eliminar</button>
     </div>
     
-    <div class="ficha col-md-8">
+    <div class="ficha col-md-6">
         <h2>{{pokemon.nombre}}</h2>
         <p>{{pokemon.descripcion}}</p>
         <strong>ATT:</strong> {{pokemon.ataque}}
