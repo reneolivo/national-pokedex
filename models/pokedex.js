@@ -223,6 +223,23 @@ module.exports.actualizar = function(id, v) {
 	return def.promise;
 }
 
+module.exports.eliminar = function(id) {
+	var def = Q.defer();
+
+	var queryString = 'DELETE FROM pokedex WHERE id = ?';
+
+	DB.run(queryString, id, function(err) {
+		if (err) {
+			err.queryString = queryString;
+			return def.reject( err );
+		}
+
+		def.resolve();
+	});
+
+	return def.promise;
+}
+
 module.exports.filtrar = function(filtros) {
 	var def = Q.defer();
 

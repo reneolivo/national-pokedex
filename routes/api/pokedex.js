@@ -41,3 +41,11 @@ exports.actualizar = function(req, res) {
 		handlerErrorGenerico( res, err );
 	});
 }
+
+exports.eliminar = function(req, res) {
+	Pokedex.eliminar( req.params.id ).then(function() {
+		res.json({success: true});
+	}).fail(function(err) {
+		handlerErrorGenerico( res, err );
+	});
+}

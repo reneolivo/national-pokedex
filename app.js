@@ -40,6 +40,7 @@ app.get( '/api/pokedex', pokedexRouter.filtrar );
 app.post( '/api/pokedex', pokedexRouter.insertar );
 app.get( '/api/pokedex/:id', pokedexRouter.uno );
 app.post( '/api/pokedex/:id', pokedexRouter.actualizar );
+app.del( '/api/pokedex/:id', pokedexRouter.eliminar );
 
 
 //RUN:
