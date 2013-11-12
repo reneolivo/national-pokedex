@@ -14,7 +14,15 @@ exports.uno = function(req, res) {
 
 exports.insertar = function(req, res) {
 	Pokedex.insertar( req.body ).then(function( idPokemon ) {
-		Pokedes.filtrar({ id : idPokemon }).then(function( resultados ) {
+		Pokedex.filtrar({ id : idPokemon }).then(function( resultados ) {
+			res.json( resultados[ 0 ] );
+		});
+	});
+}
+
+exports.actualizar = function(req, res) {
+	Pokedex.actualizar( req.params.id, req.body ).then(function() {
+		Pokedes.filtrar({ id : req.params.id }).then(function( resultados ) {
 			res.json( resultados[ 0 ] );
 		});
 	});

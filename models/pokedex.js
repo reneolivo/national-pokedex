@@ -1,7 +1,7 @@
 var Q		= require('q');
 var _		= require('lodash');
 var sqlite3 = require('sqlite3');
-var DB		= new sqlite3.Database( '../pokedex.db' );
+var DB		= new sqlite3.Database( './pokedex.db' );
 
 module.exports.init = function() {
 	console.log('init');
@@ -9,7 +9,7 @@ module.exports.init = function() {
 	this.tieneRegistros()
 	.then(function(tieneRegistros) {
 		if (tieneRegistros === false) {
-			return this.llenarTablas();
+			return module.exports.llenarTablas();
 		} else {
 			return Q.defer().resolve();
 		}
@@ -138,26 +138,77 @@ module.exports.insertar = function(v) {
 			'?,',
 			'?,',
 			'?',
-		')'
+		');'
 	].join(''));
 
 	if (Array.isArray(v.tipos)) {
 		v.tipos = v.tipos.join(',');
 	}
 
-	insert.run( 
-		v.nombre,
-		v.imagen		|| '',
-		v.descripcion 	|| '',
-		v.tipos			|| '',
-		v.ataque 		|| 0,
-		v.defensa 		|| 0,
-		v.ataqueSP 		|| 0,
-		v.defensaSP		|| 0,
-		function(err, lastID) {
-			def.resolve( lastID );
+	DB.serialize(function() {
+		insert.run( 
+			v.nombre,
+			v.imagen		|| '',
+			v.descripcion 	|| '',
+			v.tipos			|| '',
+			v.ataque 		|| 0,
+			v.defensa 		|| 0,
+			v.ataqueSP 		|| 0,
+			v.defensaSP		|| 0,
+			function(err) {
+				if (err) {
+					return def.reject( err );
+				}
+
+				//NOTE: lastID param not working on INSERT
+				//this fixes the issue:
+				DB.get('SELECT last_insert_rowid() AS lastID;', function(err, resultado) {
+					if (err) {
+						return def.reject( err );
+					}
+					
+					insert.finalize();
+
+					def.resolve( resultado.lastID );
+				})
+			}
+		);
+	});
+
+	
+
+	return def.promise;
+}
+
+module.exports.actualizar = function(v) {
+	var def = Q.defer();
+
+	var queryString = 'UPDATE pokedex SET';
+	var parametros	= [];
+
+	_.map([
+		'nombre',
+		'imagen',
+		'descripcion',
+		'tipos',
+		'ataque',
+		'defensa',
+		'ataqueSP',
+		'defensaSP'
+	], function(campo) {
+		if ('undefined' !== typeof v[ campo ]) {
+			queryString += ' ' + campo + ' = ?';
+			parametros.push( v[ campo ] );
 		}
-	);
+	});
+
+	DB.run( queryString, parametros, function(err) {
+		if (err) {
+			return def.reject( err );
+		}
+
+		return def.resolve();
+	});
 
 	return def.promise;
 }
