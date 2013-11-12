@@ -6,7 +6,7 @@ angular.module('NationalPokedex')
 		var pokemon = new PokedexREST( $scope.nuevo );
 
 		pokemon.$save(function(resultado) {
-			$scope.pokedex.pokemons.unshift( resultado );
+			$scope.pokedex.agregar( resultado );
 			$scope.reiniciar();
 			$location.path('/');
 		})

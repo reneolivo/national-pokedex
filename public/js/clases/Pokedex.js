@@ -10,12 +10,6 @@ angular.module('NationalPokedex')
       'venenoso',
       'insecto'
     ];
-    
-    function eliminar(pokemon) {
-      var indice = this.pokemons.indexOf(pokemon);
-      
-      this.pokemons.splice(indice, 1);
-    }
 
     function filtrar() {
     	var self = this;
@@ -26,11 +20,22 @@ angular.module('NationalPokedex')
     		console.log('ERROR:', err);
     	});
     }
+
+    function agregar(pokemon) {
+      this.pokemons.unshift( pokemon );
+    }
+
+    function eliminar(pokemon) {
+      var indice = this.pokemons.indexOf( pokemon );
+
+      this.pokemons.splice( indice, 1 );
+    }
     
     return {
       pokemons          : [],
       tipos             : tipos,
-      filtrar			: filtrar,
+      filtrar			      : filtrar,
+      agregar           : agregar,
       eliminar          : eliminar
     };
 });
