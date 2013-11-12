@@ -9,6 +9,9 @@ var express = require('express');
 var routes = require('./routes');
 var pokedex	= require('./routes/api/pokedex');
 
+//MODELS:
+var pokedexModel = require('./models/pokedex').init();
+
 //LIBS:
 var http = require('http');
 var path = require('path');
