@@ -1,0 +1,24 @@
+h1 {
+  margin: 0;
+  padding: 0.3em 0;
+  font-size: 14px;
+  font-weight: bold;
+  background: #EEE;
+  border-bottom: 2px solid #AAA;
+}
+
+.pokemon .perfil img {
+  display: block;
+  margin-bottom: 0.5em;
+  max-width: 80px;
+}
+
+/*tipos*/
+.tipo-normal { background: #A8A878; border: 1px solid #A8A878; }
+.tipo-fuego { background: #F08030; border: 1px solid #9C531F; }
+.tipo-agua { background: #6890F0; border: 1px solid #445E9C; }
+.tipo-grama { background: #78C850; border: 1px solid #4E8234; }
+.tipo-veneno { background: #A040A0; border: 1px solid #682A68; }
+.tipo-electrico { background: #F8D030; border: 1px solid #A1871F; }
+.tipo-roca { background: #A1871F; border: 1px solid #786824; }
+.tipo-volador { background: #A890F0; border: 1px solid #6D5E9C; }

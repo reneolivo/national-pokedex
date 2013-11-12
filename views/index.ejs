@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="NationalPokedex">
+
+  <head>
+    <title>National Pokedex</title>
+    <meta charset="utf8" />
+    <link data-require="bootstrap-css@*" data-semver="3.0.0" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+    <link data-require="bootstrap@*" data-semver="3.0.0" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+
+    <script data-require="jquery@*" data-semver="2.0.3" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script data-require="bootstrap@*" data-semver="3.0.0" src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script data-require="angular.js@*" data-semver="1.2.0-rc3-nonmin" src="http://code.angularjs.org/1.2.0-rc.3/angular.js"></script>
+    <script src="http://code.angularjs.org/1.2.0/angular-route.min.js"></script>
+
+    <script src="/js/main.js"></script>
+    <script src="/js/clases/Pokemon.js"></script>
+    <script src="/js/controladores/principal.js"></script>
+    <script src="/js/controladores/pokedex.js"></script>
+    <script src="/js/controladores/agregar.js"></script>
+    <script src="/js/controladores/detalles.js"></script>
+  </head>
+
+  <body ng-controller="ControladorPrincipal">
+    <div id="wrapper" class="container">
+      <header>
+        <h1>National Pokedex</h1>
+        
+        <nav>
+          <ul>
+            <li><a href="#/">Inicio</a></li>
+            <li><a href="#/agregar">Agregar</a></li>
+          </ul>
+        </nav>
+      </header>
+      
+      <div id="contenedor-vistas" ng-view></div>
+      
+    </div>
+  </body>
+
+</html>

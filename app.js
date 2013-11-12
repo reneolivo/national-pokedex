@@ -21,7 +21,7 @@ var app = express();
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
-app.set('view engine', 'jade');
+app.set('view engine', 'ejs');
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
@@ -35,7 +35,8 @@ if ('development' == app.get('env')) {
 }
 
 //ROUTES DEFINITION:
-app.get('/', routes.index);
+app.get('/', routes.index );
+app.get('/seccion/:seccion', routes.seccion );
 app.get( '/api/pokedex', pokedexRouter.filtrar );
 app.post( '/api/pokedex', pokedexRouter.insertar );
 app.get( '/api/pokedex/:id', pokedexRouter.uno );

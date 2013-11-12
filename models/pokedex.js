@@ -81,8 +81,8 @@ module.exports.llenarTablas = function() {
 	var def = Q.defer();
 
 	this.insertar({
-		nombre			: 'Bullbasour',
-		imagen			: '',
+		nombre			: 'Bulbasaur',
+		imagen			: 'http://cdn.bulbagarden.net/upload/2/21/001Bulbasaur.png',
 		descripcion		: 'El Pokémon planta',
 		tipos			: 'planta,veneno',
 		ataque			: 10,
@@ -91,7 +91,7 @@ module.exports.llenarTablas = function() {
 		defensaSP		: 20
 	}).then(this.insertar({
 		nombre			: 'Charmander',
-		imagen			: '',
+		imagen			: 'http://cdn.bulbagarden.net/upload/7/73/004Charmander.png',
 		descripcion		: 'El Pokémon lagarto',
 		tipos			: 'fuego',
 		ataque			: 20,
@@ -100,7 +100,7 @@ module.exports.llenarTablas = function() {
 		defensaSP		: 10
 	})).then(this.insertar({
 		nombre			: 'Squirtle',
-		imagen			: '',
+		imagen			: 'http://cdn.bulbagarden.net/upload/3/39/007Squirtle.png',
 		descripcion		: 'El Pokémon tortuga',
 		tipos			: 'agua',
 		ataque			: 10,

@@ -1,0 +1,42 @@
+<form id="agregrar-pokemon">
+  <div class="input  input-group input-group-md">
+      <strong class="input-group-addon">Nombre:</strong>
+      <input class="form-control" type="text" ng-model="nuevo.nombre" />
+  </div>
+  
+  <div class="input  input-group input-group-md">
+      <strong class="input-group-addon">Tipo:</strong>
+      <select class="form-control" ng-model="tipoSeleccionado" ng-options="tipo for tipo in pokedex.tipos"></select>
+      <div class="input-group-btn">
+        <button class="btn btn-default" ng-click="nuevo.agregarTipo( tipoSeleccionado );">
+          <i class="glyphicon glyphicon-plus"></i>
+        </button>
+      </div>
+  </div>
+  
+  <div class="tipos">
+    <span class="tipo label label-primary" ng-repeat="tipo in nuevo.tipos">
+      {{tipo}}
+      <a class="glyphicon glyphicon-remove" href="#" ng-click="nuevo.eliminarTipo( tipo )"></a>    
+    </span>
+  </div>
+  
+  <div class="input input-group input-group-md">
+    <strong class="input-group-addon">ATT:</strong>
+    <input class="form-control" ng-model="nuevo.ataque" />
+    <strong class="input-group-addon">DEF:</strong>
+    <input class="form-control" ng-model="nuevo.defensa"  />
+  </div>
+  
+  <div class="input input-group input-group-md">
+    <strong class="input-group-addon">SP:</strong>
+    <input class="form-control" ng-model="nuevo.ataqueSP"  />
+    <strong class="input-group-addon">SPD:</strong>
+    <input class="form-control" ng-model="nuevo.defensaSP"  />
+  </div>
+  
+  <div class="input">
+    <button class="btn btn-default" ng-click="reiniciar()">Cancelar</button>
+    <button class="btn btn-primary" ng-click="agregar();">Agregar</button>
+  </div>
+</form>
