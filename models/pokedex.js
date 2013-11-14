@@ -253,8 +253,8 @@ module.exports.filtrar = function(filtros) {
 	}
 
 	if (filtros.tipos) {
-		//TODO: SQL Injection:
-		queryString += ' AND tipos LIKE "%'+ filtros.tipos +'%"';
+		queryString += ' AND tipos LIKE ?';
+		params.push( '%' + filtros.tipos + '%' )
 	}
 
 	queryString += ' ORDER BY id DESC';
